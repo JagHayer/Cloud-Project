@@ -17,11 +17,11 @@ import shlex
 
 argparser = argparse.ArgumentParser(sys.argv[0])
 
-argparser.add_argument('--train_file', help='Trained file', default="../data/smsspamcollection/train.csv", type=str)
+argparser.add_argument('--train_file', help='Trained file', default="data/smsspamcollection/train.csv", type=str)
 
-argparser.add_argument('--dev_file', help='Developed file', default="../data/smsspamcollection/dev.csv", type=str)
+argparser.add_argument('--dev_file', help='Developed file', default="data/smsspamcollection/dev.csv", type=str)
 
-argparser.add_argument('--test_file', help='Tested file', default="../data/smsspamcollection/dev.csv", type=str)
+argparser.add_argument('--test_file', help='Tested file', default="data/smsspamcollection/dev.csv", type=str)
 
 argparser.add_argument("--tfidf", action='store_true', default=False, help="tfidf flag")
 
@@ -31,15 +31,22 @@ argparser.add_argument("--scaler", action='store_true', default=False, help="sca
 
 argparser.add_argument('--ml_cls', help='Machine learning classifier', default="MLP", type=str)
 
-argparser.add_argument('--model_dir', help='Model dir', default="../data/smsspamcollection/", type=str)
+argparser.add_argument('--model_dir', help='Model dir', default="data/smsspamcollection/", type=str)
 
 args, unknown = argparser.parse_known_args()
 
 model_dir, _ = os.path.split(args.model_dir)
 
-if not os.path.exists(args.model_dir):
-    os.mkdir(args.model_dir)
-args.model_name = os.path.join(args.model_dir, args.ml_cls + ".pickle")
+#if not os.path.exists(args.model_dir):
+#    os.mkdir(args.model_dir)
+#args.model_name = os.path.join(args.model_dir, args.ml_cls + ".pickle")
+#model_api = load(args.model_name)
+
+root = os.path.dirname(os.path.abspath(__file__))
+path_pickel = os.path.join(root, "data", "smsspamcollection", "MLP.pickle")
+if not os.path.exists(path_pickel):
+    print("Error Data folder not found")
+model_api = load(path_pickel)
 
 # define the app
 DebuggingOn = bool(os.getenv('DEBUG', False))  # Whether the Flask app is run in debugging mode, or not.
@@ -55,7 +62,6 @@ CORS(app)  # needed for cross-domain requests, allow everything by default
 #                          stderr=subprocess.PIPE,
 #                          universal_newlines=True)
 
-model_api = load(args.model_name)
 
 
 def sigterm_handler(_signo, _stack_frame):
@@ -176,7 +182,7 @@ if __name__ == '__main__':
     http://127.0.0.1:5000/getapi_np5?nl=What%20is%20the%20average%20number%20of%20employees%20of%20the%20departments%20whose%20rank%20is%20between%2010%20and%2015?&dbid=department_management                                                                                                                                                                                                      
     reply to win £100 weekly!
     """
-    app.run(debug=True)
-    #app.run(host='127.0.0.1', port=8080, debug=True)
+    #app.run(debug=True)
+    app.run(host='127.0.0.1', port=8080, debug=True)
     #app.run(host='0.0.0.0', port=8080, debug=True)
 
