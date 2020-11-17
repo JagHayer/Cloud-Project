@@ -1,0 +1,98 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubernetes.io/limit-ranger: 'LimitRanger plugin set: cpu request for container
+      app'
+  creationTimestamp: "2020-11-17T14:37:54Z"
+  generateName: app-7557889476-
+  labels:
+    app: app
+    pod-template-hash: "7557889476"
+  name: app-7557889476-5tmrn
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: app-7557889476
+    uid: acb853a0-8999-4e79-943d-fd548ba91550
+  resourceVersion: "1391"
+  selfLink: /api/v1/namespaces/default/pods/app-7557889476-5tmrn
+  uid: 3819e34f-2017-400b-b581-613762be52ee
+spec:
+  containers:
+  - image: gcr.io/teamproject-295903/app:v1
+    imagePullPolicy: IfNotPresent
+    name: app
+    resources:
+      requests:
+        cpu: 100m
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-lxw57
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: gke-project-cluster-default-pool-5a3dbc4f-1fch
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: default-token-lxw57
+    secret:
+      defaultMode: 420
+      secretName: default-token-lxw57
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2020-11-17T14:37:54Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2020-11-17T14:38:31Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2020-11-17T14:38:31Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2020-11-17T14:37:54Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://209f563de234de4ee4cf5e13f1338a5350fa0a345d8c7115f15564246c8edae9
+    image: gcr.io/teamproject-295903/app:v1
+    imageID: docker-pullable://gcr.io/teamproject-295903/app@sha256:3ca1690d3d31ffd20918abd3515c3cc604ae7c068899432ba688b2efd42dda65
+    lastState: {}
+    name: app
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2020-11-17T14:38:30Z"
+  hostIP: 10.128.0.5
+  phase: Running
+  podIP: 10.0.2.3
+  podIPs:
+  - ip: 10.0.2.3
+  qosClass: Burstable
+  startTime: "2020-11-17T14:37:54Z"
