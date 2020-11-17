@@ -29,7 +29,7 @@ argparser.add_argument("--use_hash", action='store_true', default=False, help="h
 
 argparser.add_argument("--scaler", action='store_true', default=False, help="scale flag")
 
-argparser.add_argument('--ml_cls', help='Machine learning classifier', default="MLP", type=str)
+argparser.add_argument('--ml_cls', help='Machine learning classifier', default="NB", type=str)
 
 argparser.add_argument('--model_dir', help='Model dir', default="data/smsspamcollection/", type=str)
 
@@ -43,7 +43,7 @@ model_dir, _ = os.path.split(args.model_dir)
 #model_api = load(args.model_name)
 
 root = os.path.dirname(os.path.abspath(__file__))
-path_pickel = os.path.join(root, "data", "smsspamcollection", "MLP.pickle")
+path_pickel = os.path.join(root, "data", "smsspamcollection", "NB.pickle")
 if not os.path.exists(path_pickel):
     print("Error Data folder not found")
 model_api = load(path_pickel)
