@@ -183,15 +183,14 @@ def sql():
     'user': 'root',
     'password': 'cloud123',
     'host': '35.239.122.246',
-     'database':'cloudbroject',   
+    'database':'cloudbroject',   
     'client_flags': [ClientFlag.SSL],
     'ssl_ca': 'ssl/server-ca.pem',
     'ssl_cert': 'ssl/client-cert.pem',
     'ssl_key': 'ssl/client-key.pem'
     
 }
-    with sql.connect(**config) as cnx:
-
+with sql.connect(**config) as cnx:
     cur = cnx.cursor()
     cur.execute("")
     cnx.commit()
