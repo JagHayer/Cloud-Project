@@ -14,6 +14,8 @@ import signal
 import datetime
 import sys
 import shlex
+import mysql.connector
+from mysql.connector.constants import ClientFlag
 
 argparser = argparse.ArgumentParser(sys.argv[0])
 
@@ -175,6 +177,23 @@ def inference():
             return render_template('inference.html', label=label, prob=prob)
     return render_template('inference.html', label="NA", prob="NA")
 
+@app.route('/sql', methods=['POST', 'GET'])
+def sql():
+    config = {
+    'user': 'root',
+    'password': 'cloud123',
+    'host': '35.239.122.246',
+     'database':'cloudbroject',   
+    'client_flags': [ClientFlag.SSL],
+    'ssl_ca': 'ssl/server-ca.pem',
+    'ssl_cert': 'ssl/client-cert.pem',
+    'ssl_key': 'ssl/client-key.pem'
+     cnx = sql.connect(**config) 
+    cur = cnx.cursor()
+    cur.execute("select * from data")
+    rows = cur.fetchall()
+    cnx.close()
+}
 
 if __name__ == '__main__':
     """
