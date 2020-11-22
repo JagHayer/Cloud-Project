@@ -195,7 +195,7 @@ with sql.connect(**config) as cnx:
     cur.execute("")
     cnx.commit()
     cnx.close()
-    return render_template('sql.html')
+return render_template('sql.html')
 
 if __name__ == '__main__':
     """
