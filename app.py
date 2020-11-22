@@ -188,12 +188,15 @@ def sql():
     'ssl_ca': 'ssl/server-ca.pem',
     'ssl_cert': 'ssl/client-cert.pem',
     'ssl_key': 'ssl/client-key.pem'
-     cnx = sql.connect(**config) 
-    cur = cnx.cursor()
-    cur.execute("select * from data")
-    rows = cur.fetchall()
-    cnx.close()
+    
 }
+    with sql.connect(**config) as cnx:
+
+    cur = cnx.cursor()
+    cur.execute("")
+    cnx.commit()
+    cnx.close()
+    return render_template('sql.html')
 
 if __name__ == '__main__':
     """
