@@ -190,12 +190,13 @@ def sql():
     'ssl_key': 'ssl/client-key.pem'
     
 }
+
 with sql.connect(**config) as cnx:
-    cur = cnx.cursor()
-    cur.execute("")
-    cnx.commit()
-    cnx.close()
-    return render_template('sql.html')
+cur = cnx.cursor()
+cur.execute("")
+cnx.commit()
+cnx.close()
+return render_template('sql.html')
 
 if __name__ == '__main__':
     """
