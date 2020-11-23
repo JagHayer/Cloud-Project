@@ -4,18 +4,12 @@
 """
 import os
 import argparse
-import subprocess
-import logging
-from flask import Flask, request, jsonify, render_template, url_for, flash, redirect
-from werkzeug.exceptions import abort
+from flask import Flask, request, jsonify, render_template, flash
 from flask_cors import CORS
 from baselines import load
 import signal
 import datetime
 import sys
-import shlex
-import mysql.connector
-from mysql.connector.constants import ClientFlag
 
 argparser = argparse.ArgumentParser(sys.argv[0])
 
@@ -177,25 +171,6 @@ def inference():
             return render_template('inference.html', label=label, prob=prob)
     return render_template('inference.html', label="NA", prob="NA")
 
-@app.route('/sql', methods=['POST', 'GET'])
-def sql():
-    config = {
-    'user': 'root',
-    'password': 'cloud123',
-    'host': '35.239.122.246',
-    'database':'cloudbroject',   
-    'client_flags': [ClientFlag.SSL],
-    'ssl_ca': 'ssl/server-ca.pem',
-    'ssl_cert': 'ssl/client-cert.pem',
-    'ssl_key': 'ssl/client-key.pem'   
-    }
-    with sql.connect(**config) as cnx:
-        cur = cnx.cursor()
-        cur.execute("")
-        cnx.commit()
-        cnx.close()
-        return render_template('sql.html')
-
 if __name__ == '__main__':
     """
     kill -9 $(lsof -i:5000 -t) 2> /dev/null
@@ -203,6 +178,6 @@ if __name__ == '__main__':
     reply to win £100 weekly!
     """
     #app.run(debug=True)
-    #app.run(host='127.0.0.1', port=8080, debug=True)
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host='127.0.0.1', port=8080, debug=True)
+    #app.run(host='0.0.0.0', port=8080, debug=True)
 
