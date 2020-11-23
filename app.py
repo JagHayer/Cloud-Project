@@ -187,15 +187,14 @@ def sql():
     'client_flags': [ClientFlag.SSL],
     'ssl_ca': 'ssl/server-ca.pem',
     'ssl_cert': 'ssl/client-cert.pem',
-    'ssl_key': 'ssl/client-key.pem'
-    
-}
-with sql.connect(**config) as cnx:
-    cur = cnx.cursor()
-    cur.execute("")
-    cnx.commit()
-    cnx.close()
-return render_template('sql.html')
+    'ssl_key': 'ssl/client-key.pem'   
+    }
+    with sql.connect(**config) as cnx:
+        cur = cnx.cursor()
+        cur.execute("")
+        cnx.commit()
+        cnx.close()
+        return render_template('sql.html')
 
 if __name__ == '__main__':
     """
